@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>SELECT DATE</title>
+        <style>
+            .redbutton{
+                background-color: red;
+            }
+            .greenbutton{
+                background-color: green;
+            }
+            .whitebutton{
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>    
+        <script>
+            function writeChar(n,min, max, char = "0") {
+                return (n>=min&&n<=max)?char:'';
+            }
+            let doc = document;
+            let objects = [];
+            let colorClasses = ["greenbutton", "redbutton", "whitebutton"];
+            let touches = []
+            let beginDate = new Date(2021, 8, 1);
+            let endDate = new Date(2021,8,10);
+            doc.write("<form id = 'f'>");
+            let form = doc.getElementById('f');
+            doc.write("<p>");
+                for(let i = 0; i < endDate.getDate(); ++i){
+                    let date = new Date(beginDate.getFullYear(), beginDate.getMonth(), beginDate.getDate()+i);
+                    doc.write('<input type = "button" value = "' +writeChar(+date.getDate(),1,9)+ date.getDate() + '.'+ writeChar(+date.getMonth()+1,1,9)+
+                    (+date.getMonth()+1)+'.' +date.getFullYear() + '" id = "inpid' + i + '" class = "whitebutton">');
+                    // objects.push({date: date.toString(), color: 2, input: document.getElementById("inpid"+i), fn: function(){
+                    //     this.color++;
+                    //     this.color %= 3;
+                    //     this.input.className = colorClasses[this.color];
+                    //     console.log(this.input.className);
+                    // }});
+                    // objects[i].input.addEventListener("onclick", objects[i].fn());
+                    touches.push(2);
+                    doc.getElementById("inpid"+i).onclick = function fn(event) {
+                        touches[i]++;
+                        touches[i] %= 3;
+                        doc.getElementById("inpid"+i).className = colorClasses[touches[i]];
+                    }
+                }
+            doc.write("</p>");
+            doc.write("</form>");
+        </script>
+    </body>
+</html>
